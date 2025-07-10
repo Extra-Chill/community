@@ -62,7 +62,13 @@ $has_any_thumbnail = ($featured_thumbnail_url && $featured_thumbnail_url !== '#'
     </div>
 </div>
 
-<input type="hidden" name="featured_link_thumbnail_id_action" id="featured_link_thumbnail_id_action" value="<?php echo ($show_featured_link_card && $featured_thumbnail_id && $featured_link_original_id_val) ? 'remove' : ''; ?>">
+<?php if ($show_featured_link_card && $featured_thumbnail_id && $featured_link_original_id_val) : ?>
+    <input type="hidden" name="featured_link_thumbnail_id_action" id="featured_link_thumbnail_id_action" value="remove">
+<?php else: ?>
+    <input type="hidden" name="featured_link_thumbnail_id_action" id="featured_link_thumbnail_id_action" value="">
+<?php endif; ?>
+
+<input type="hidden" name="featured_link_thumbnail_id_action" id="featured_link_thumbnail_id_action_unified" value="<?php echo ($show_featured_link_card && $featured_thumbnail_id && $featured_link_original_id_val) ? 'remove' : ''; ?>">
 
 <!-- Fonts Card -->
 <div class="link-page-content-card">
@@ -225,7 +231,7 @@ $has_any_thumbnail = ($featured_thumbnail_url && $featured_thumbnail_url !== '#'
 </div>
 
 <!-- Add the hidden input for custom CSS vars JSON -->
-<input type="hidden" id="link_page_custom_css_vars_json" name="link_page_custom_css_vars_json" value="<?php echo esc_attr(json_encode($custom_vars)); ?>" data-initial-value="<?php echo esc_attr(json_encode($custom_vars)); ?>">
+<input type="hidden" id="link_page_custom_css_vars_json" name="link_page_custom_css_vars_json" value="<?php echo esc_attr(json_encode($custom_vars)); ?>">
 
 <input type="hidden" name="featured_link_og_image_removed" id="featured_link_og_image_removed" value="<?php echo get_post_meta(
     $link_page_id,
